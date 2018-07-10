@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/theming';
 @import '~@angular/material/prebuilt-themes/pink-bluegrey.css';
+@import './assets/styles/reset.scss';
+@import './assets/styles/mixins.scss';
+@import './assets/styles/buttons.scss';
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,500,900&subset=cyrillic');
 
@@ -19,6 +22,16 @@ $dark-app-theme: mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app-w
 @include mat-core($custom-typography);
 
 body {
-    font-family: 'Roboto', sans-serif;
+  @include centeredContent;
+
+  height: 100vh;
+  width: 100vw;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+html {
+  font-size: 16px;
+  font-weight: 300;
 }
 

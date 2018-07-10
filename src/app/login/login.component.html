@@ -1,0 +1,13 @@
+<div class="login-wrap">
+  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="login-field-wrap">
+      <input type="text" class="login-field" placeholder="Enter your login"  formControlName="login">
+    </div>
+    <div class="login-field-wrap">
+      <input type="password" class="login-field" placeholder="Enter your password" formControlName="password">
+    </div>
+    <div class="login-field-wrap">
+      <button type="submit" class="button button__success button__large" [disabled]="loginForm.invalid">Login</button>
+    </div>
+  </form>
+</div>
