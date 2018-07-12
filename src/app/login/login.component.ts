@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { AuthService } from '../core/shared/auth.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +12,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
     this.createForm();
    }
@@ -26,7 +29,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('form submited');
+    this.authService.login(this.loginForm);
   }
 
   disableControl() {
