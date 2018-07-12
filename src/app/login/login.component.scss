@@ -1,0 +1,32 @@
+@import '../../assets/styles/mixins.scss';
+@import '../../assets/styles/variables.scss';
+
+.login {
+  &-wrap {
+    @include centeredContent;
+
+    width: 300px;
+    margin-top: calc(50% - 300px);
+  }
+
+  &-field {
+    height: 32px;
+    width: 100%;
+    padding: 5px 10px;
+
+    &-wrap {
+      @include centeredContent;
+
+      margin-bottom: 24px;
+
+      &:nth-last-of-type(1) {
+        margin-bottom: 0;
+      }
+    }
+
+  }
+
+  &-form {
+    width: 100%;
+  }
+}

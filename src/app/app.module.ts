@@ -1,10 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginModule } from './login/login.module';
 
 import { AppComponent } from './app.component';
 
@@ -14,11 +13,12 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
+    RouterModule.forRoot([], { enableTracing: true }),
     BrowserModule,
-
+    MatCheckboxModule,
     BrowserAnimationsModule,
 
-    MatCheckboxModule
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
