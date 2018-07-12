@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MainModule } from './main/main.module';
 import { LoginModule } from './login/login.module';
 
 import { AppComponent } from './app.component';
@@ -10,7 +12,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     RouterModule.forRoot([], { enableTracing: true }),
@@ -18,7 +20,8 @@ import { AppComponent } from './app.component';
     MatCheckboxModule,
     BrowserAnimationsModule,
 
-    LoginModule
+    MainModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
