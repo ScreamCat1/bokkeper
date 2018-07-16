@@ -11,13 +11,14 @@ import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
 
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     CoreModule,
-    RouterModule.forRoot([], { enableTracing: true }),
+    RouterModule.forRoot([]),
     BrowserModule,
     MatCheckboxModule,
     BrowserAnimationsModule,

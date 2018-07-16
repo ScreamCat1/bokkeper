@@ -1,0 +1,44 @@
+<div>
+  <p>
+    All sum:
+    {{ sum }}
+  </p>
+
+  <div>
+    Days left: {{ daysLeft }}
+  </div>
+  <div>
+    Sum left: {{ sumLeft }}
+  </div>
+  <div>
+    sum per day:
+    {{ sumPerDay }}
+  </div>
+<hr>
+  <div>
+    category:
+    <ul>
+      <li>
+        <div>
+          <p>
+              Food
+          </p>
+          3000
+        </div>
+      </li>
+      <li>
+        <div>
+          <p>
+              Public transport
+          </p>
+          170
+        </div>
+      </li>
+      <li></li>
+    </ul>
+  </div>
+</div>
+
+<div (click)="addedSpentMoneyToCategory($event)">
+  <button class="button button__large" data-type="public transport">P.T</button>
+</div>

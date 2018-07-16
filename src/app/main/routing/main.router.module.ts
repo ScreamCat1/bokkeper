@@ -5,18 +5,19 @@ import { MainComponent } from '../main.component';
 
 import { AuthGuardService } from '../../core/shared/auth-guard.service';
 
-const MainRouters: Routes = [
+const MainRoutes: Routes = [
   {
-    path: 'main',
+    path: '',
     pathMatch: 'full',
     canActivate: [AuthGuardService],
-    component: MainComponent
+    // component: MainComponent,
+    redirectTo: '/month-budget'
    }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(MainRouters)
+    RouterModule.forChild(MainRoutes)
   ],
   exports: [
     RouterModule

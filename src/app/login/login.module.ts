@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { LoginRoutingModule } from './routing/login.router.module';
 
+import { CoreModule } from '../core/core.module';
 
 import { LoginComponent } from './login.component';
 
@@ -12,8 +12,8 @@ import { LoginComponent } from './login.component';
   ],
   providers: [],
   imports: [
-    LoginRoutingModule,
-    ReactiveFormsModule
+    CoreModule,
+    LoginRoutingModule
   ],
   exports: [
     LoginComponent

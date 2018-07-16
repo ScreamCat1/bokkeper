@@ -1,0 +1,15 @@
+<div class="outwrap" id="outwrap" appClosePopup>
+    <div class="popup">
+        <form [formGroup]="addedSumForm" (ngSubmit)="onSubmit()">
+          <div>
+            <input type="text" placeholder="Enter sum" pattern="^\d+(\.\d{1,3})?" formControlName="sum">
+          </div>
+          <div>
+            <input type="text" placeholder="Enter description"  formControlName="description">
+          </div>
+          <div>
+            <button type="submit" class="button button__large" [disabled]="addedSumForm.invalid">Save</button>
+          </div>
+        </form>
+      </div>
+</div>
