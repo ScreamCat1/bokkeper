@@ -1,9 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DateService } from '../../core/shared/date.service';
-import { LocalStoreService } from '../../core/shared/local-store.service';
+import { WhttpService } from '../../core/shared/whttp.service';
 import { MonthSpentService } from '../../core/shared/month-spent.service';
 
+interface Category {
+  category: string;
+}
+interface CategoryDetails {
+  category: string;
+  sumSpent: number;
+}
 @Component({
   selector: 'app-month-budget-main',
   templateUrl: './month-budget-main.component.html',
@@ -13,29 +20,47 @@ export class MonthBudgetMainComponent implements OnInit {
   sum: number;
   sumLeft: number;
   sumSpent: number;
-  sumPerDay: number;
   daysLeft: number;
+  sumPerDay: number;
+  needRegistration = true;
+  categories: Array<Category> = [];
 
   constructor(
+    private whttp: WhttpService,
     private dateService: DateService,
-    private localStoreService: LocalStoreService,
     private monthSpentService: MonthSpentService
   ) { }
 
   ngOnInit() {
     this.daysLeft = this.dateService.getDaysLeft();
 
-    this.monthSpentService.observable.subscribe(({ sum, sumSpent, sumLeft }) => {
-      console.log({ sum, sumSpent, sumLeft });
+    this.whttp.getUserMonthSum().subscribe( response => {
+      if (!!response.value) {
+        this.needRegistration = false;
+      }
+    });
+
+    this.monthSpentService.observable.subscribe(({ sum, sumSpent, categories }) => {
       this.sum = sum;
+      this.sumLeft = sum - sumSpent;
       this.sumSpent = sumSpent;
-      this.sumLeft = sumLeft;
-      this.sumPerDay = Math.round(this.sumLeft / this.dateService.daysInMonth());
+      this.sumPerDay = Math.round(this.sumLeft / this.dateService.getDaysLeft());
+      this.categories = categories;
     });
   }
 
 
-  addedSpentMoneyToCategory({ target: { dataset: { type }}}): void {
-    this.monthSpentService.openPopup(type);
+  addSpentMoneyToCategory({ target: { type }}): void {
+    if (type) {
+      this.monthSpentService.addSpentMoneyToCategory(type);
+    }
+  }
+
+  addNewCategory() {
+    this.monthSpentService.addNewCategory();
+  }
+
+  isNeedRegistration(): boolean {
+    return this.needRegistration;
   }
 }

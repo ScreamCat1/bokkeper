@@ -4,14 +4,36 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from '../main.component';
 
 import { AuthGuardService } from '../../core/shared/auth-guard.service';
+import { MonthBudgetMainComponent } from '../../month-budget/month-budget-main/month-budget-main.component';
+import { RegisterComponent } from '../../month-budget/register/register.component';
+import { DepositesComponent } from '../../deposites/deposites.component';
+import { MonthBudgetComponent } from '../../month-budget/month-budget.component';
 
 const MainRoutes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
+    path: 'main',
     canActivate: [AuthGuardService],
-    // component: MainComponent,
-    redirectTo: '/month-budget'
+    component: MainComponent,
+    children: [
+      {
+        path: 'month-budget',
+        component: MonthBudgetComponent,
+        children: [
+          {
+            path: '',
+            component: RegisterComponent
+          },
+          {
+            path: 'main',
+            component: MonthBudgetMainComponent
+          }
+        ]
+      },
+      {
+        path: 'deposites',
+        component: DepositesComponent
+      }
+    ]
    }
 ];
 

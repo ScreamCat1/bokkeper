@@ -8,11 +8,13 @@ import { MonthBudgetModule } from '../month-budget/month-budget.module';
 import { MainService } from './shared/main.service';
 
 import { MainComponent } from './main.component';
+import { MainNavComponent } from './main-nav/main-nav.component';
 
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    MainNavComponent
   ],
   providers: [
     MainService

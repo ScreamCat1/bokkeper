@@ -23,9 +23,7 @@ $dark-app-theme: mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app-w
 
 body {
   @include centeredContent;
-
-  height: 100vh;
-  width: 100vw;
+  @include wrapper;
 
   font-family: 'Roboto', sans-serif;
 }
@@ -33,5 +31,6 @@ body {
 html {
   font-size: 16px;
   font-weight: 300;
+  letter-spacing: 0.1rem;
 }
 

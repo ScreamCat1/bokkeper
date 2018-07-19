@@ -1,0 +1,37 @@
+@import '../../../assets/styles/variables.scss';
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+
+  &-item {
+    flex-grow: 1;
+
+    margin-right: 24px;
+
+
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  &-link {
+    display: block;
+
+    padding: 8px;
+
+    background-color: $navigation-element-color;
+
+    color: $navigation-link-color;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $navigation-element-hover-color;
+    }
+
+    &__active {
+      background-color: $navigation-element-hover-color;
+    }
+  }
+}

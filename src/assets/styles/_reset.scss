@@ -40,7 +40,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
-input:focus {
+input:focus,
+button:active,
+button:focus, {
   outline: none;
 }
 

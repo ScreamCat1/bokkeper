@@ -5,7 +5,7 @@ import { PopupComponent } from '../popup/popup.component';
 
 const SharedRoutes: Routes = [
   {
-    path: 'popup',
+    path: 'popup/:type',
     outlet: 'popup',
     component: PopupComponent,
   }

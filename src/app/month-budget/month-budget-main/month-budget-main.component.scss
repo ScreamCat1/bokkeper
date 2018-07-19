@@ -1,0 +1,36 @@
+@import '../../../assets/styles/mixins.scss';
+
+.month-budget {
+  display: flex;
+  justify-content: space-between;
+
+  &-categories {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 2;
+
+    &-element {
+      margin-bottom: 1rem;
+      margin-left: 2rem;
+      width: 10rem;
+    }
+  }
+
+  &-statistic {
+    flex-grow: 1;
+
+    &-element__value {
+      font-weight: bold;
+    }
+
+    &-element {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-new-category {
+    flex-grow: 1;
+
+    text-align: right;
+  }
+}

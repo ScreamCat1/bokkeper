@@ -1,4 +1,35 @@
+@import '../../assets/styles/mixins.scss';
+
 .main {
-  width: 100vw;
-  height: 100vh;
+  @include wrapper;
+
+  padding: 24px;
+  box-sizing: border-box;
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-section {
+    &__card {
+      flex-grow: 2;
+
+      text-align: left;
+    }
+
+    &__capabilites {
+      flex-grow: 1;
+
+      margin-bottom: 8rem;
+
+      text-align: center;
+    }
+
+    &__logout {
+      flex-grow: 2;
+
+      text-align: right;
+    }
+  }
 }

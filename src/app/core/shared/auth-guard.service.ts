@@ -17,11 +17,11 @@ export class AuthGuardService implements CanActivate {
   }
 
   private checkoutLogin(url) {
-    if (true || this.authService.isAccessAllowed) {
+    if (this.authService.isAccessAllowed) {
       return true;
     }
 
-    // this.router.navigate(['']);
-    // return false;
+    this.router.navigate(['']);
+    return false;
   }
 }

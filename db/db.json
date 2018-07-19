@@ -1,0 +1,71 @@
+{
+  "users": {
+    "login": "1",
+    "password": "1"
+  },
+  "sum": {
+    "value": "3000"
+  },
+  "month-spent-sum": [
+    {
+      "sum": "250",
+      "description": "taxi",
+      "category": "public transport",
+      "id": 1
+    },
+    {
+      "sum": "35",
+      "category": "public transport",
+      "description": "Burger",
+      "category": "food",
+      "id": 2
+    },
+    {
+      "sum": "40",
+      "category": "public transport",
+      "description": "Burger",
+      "category": "food",
+      "id": 3
+    },
+    {
+      "sum": "2000",
+      "description": "Taxi",
+      "category": "public transport",
+      "id": 4
+    },
+    {
+      "sum": "10",
+      "category": "public transport",
+      "description": "Lavash",
+      "id": 5
+    },
+    {
+      "sum": "8",
+      "category": "food",
+      "description": "metro",
+      "id": 6
+    },
+    {
+      "sum": "8",
+      "category": "food",
+      "description": "tramvai",
+      "id": 7
+    },
+    {
+      "sum": "49",
+      "category": "food",
+      "description": "taxi",
+      "id": 8
+    }
+  ],
+  "categories": [
+    {
+      "category": "food",
+      "id": 1
+    },
+    {
+      "category": "public transport",
+      "id": 2
+    }
+  ]
+}

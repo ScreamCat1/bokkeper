@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { LocalStoreService } from './local-store.service';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+import { WhttpService } from './whttp.service';
 
 interface SpentCategoryMoney {
   sum: number;
@@ -10,60 +10,93 @@ interface SpentCategoryMoney {
   description: string;
 }
 
-interface MoneyDetails {
+interface DataDetails {
   sum: number;
-  sumLeft: number;
+  sumSpent: number;
+  categories: Array<Category>;
+}
+
+interface Category {
+  category: string;
   sumSpent: number;
 }
 
 @Injectable()
 export class MonthSpentService {
-  categories: Array<string> = [
-    'food',
-    'public transport'
-  ];
+  sum = 0;
+  sumSpent = 0;
+  private allSpentMoneyInMonth = [];
+  private categories: Array<Category> = [];
+  observable = new BehaviorSubject(this.getData());
 
-  money: MoneyDetails;
-  observable = new BehaviorSubject(this.getAllSum());
-  private allSpentMoneyInMonth: Array<SpentCategoryMoney> = [];
   private category: string;
 
   constructor(
     private router: Router,
-    private localStoreService: LocalStoreService
-  ) {}
+    private whttp: WhttpService
+  ) {
+    this.whttp.getUserMonthSum().subscribe((response: { value: number }) => {
+      this.sum = Number(response.value);
 
-  addSpentMoneyToCategory(obj) {
-    this.allSpentMoneyInMonth.push({
+      this.whttp.getCategories().subscribe((categories: Array<Category>) => { this.categories = categories; });
+
+      this.whttp.getMonthSumSpent().subscribe((res: Array<SpentCategoryMoney>) => {
+        this.allSpentMoneyInMonth = res;
+
+        this.observable.next(this.getData());
+      });
+    });
+  }
+
+  saveSpentMoneyToCategory(obj) {
+    const newSpent = {
       ...obj,
       category: this.category
-    });
+    };
 
-    this.localStoreService.setItem('sumSpent', `${this.calculateAllSpentSum()}`);
+    this.allSpentMoneyInMonth.push(newSpent);
 
-    this.observable.next(this.getAllSum());
-
-    this.router.navigate([{ outlets: { popup: null }}]);
+    this.whttp.setMonthSumSpent(newSpent)
+      .subscribe(() => {
+        this.observable.next(this.getData());
+        this.router.navigate([{ outlets: { popup: null }}]);
+      });
   }
 
-  openPopup(category: string): void {
+  saveNewCategory({ category }: { category: string }) {
+    this.whttp.setCategory(category)
+      .subscribe((response: Category) => {
+        this.categories.push(response);
+        this.router.navigate([{ outlets: { popup: null }}]);
+      });
+  }
+
+  addSpentMoneyToCategory(category: string): void {
     this.category = category;
-    this.router.navigate([{ outlets: { popup: ['popup'] }}]);
+    this.router.navigate([{ outlets: { popup: ['popup', 'addSpentMoney'] }}]);
   }
 
-  private calculateAllSpentSum(): number {
-    return this.allSpentMoneyInMonth.reduce((accumulator, currentValue) => accumulator + Number(currentValue.sum), 0);
+  addNewCategory(): void {
+    this.router.navigate([{ outlets: { popup: ['popup', 'addNewCategory'] }}]);
   }
 
-  private getSum(key: string): number {
-    return Number(this.localStoreService.getItem(key));
+  private calculateAllSpentSum(category: string = ''): number {
+    return this.allSpentMoneyInMonth
+      .filter((c: SpentCategoryMoney) => {
+        return category === '' ? c : c.category === category;
+      })
+      .reduce((accumulator, currentValue) => accumulator + Number(currentValue.sum), 0);
   }
 
-  private getAllSum(): MoneyDetails {
+  private recalculateCategories(): Array<Category> {
+    return this.categories.map( category => ({...category, spentSum: this.calculateAllSpentSum(category.category) }));
+  }
+
+  private getData(): DataDetails {
     return {
-      sum: this.getSum('sum'),
-      sumSpent: this.getSum('sumSpent'),
-      sumLeft: this.getSum('sum') - this.getSum('sumSpent')
+      sum: this.sum,
+      sumSpent: this.calculateAllSpentSum(),
+      categories: this.recalculateCategories()
     };
   }
 }

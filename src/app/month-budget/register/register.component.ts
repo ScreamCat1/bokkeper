@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
+import { WhttpService } from '../../core/shared/whttp.service';
 import { LocalStoreService } from '../../core/shared/local-store.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private whttp: WhttpService,
     private router: Router,
     private localStoreService: LocalStoreService
   ) {
@@ -28,8 +30,9 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    this.localStoreService.setItem('sum', this.sumForm.value.sum);
+    this.whttp.setUserMonthSum({ value: this.sumForm.value.sum}).subscribe(() => {
     this.redirect();
+    });
   }
 
   hasPatternError(): boolean {
@@ -43,7 +46,6 @@ export class RegisterComponent implements OnInit {
   }
 
   private redirect(): void {
-    this.router.navigate(['main'], { relativeTo: this.route });
+    this.router.navigate(['main/month-budget/main']);
   }
-
 }
