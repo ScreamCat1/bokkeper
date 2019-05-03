@@ -18,10 +18,21 @@ export class LoginComponent implements OnInit {
     this.createForm();
    }
 
+
+
+
+
+
   ngOnInit() {
   }
 
+
+
+
+
   createForm() {
+    this.authService.isAccessAllowed;
+
     this.loginForm = this.fb.group({
       login:  ['', Validators.required ],
       password:  ['', Validators.required ]
