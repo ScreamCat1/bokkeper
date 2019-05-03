@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
   createForm() {
-    this.loginForm = this.fb.group({
-      login:  ['', Validators.required ],
-      password:  ['', Validators.required ]
-    });
+    // this.loginForm = this.fb.group({
+    //   login:  ['', Validators.required ],
+    //   password:  ['', Validators.required ]
+    // });
   }
 
   onSubmit() {
